@@ -5,7 +5,7 @@ export default class SearchController extends Component {
   componentDidMount(){
     this.searchBar.focus();
   }
-  onSearch(text){
+  onChangeSearchBar(text){
     console.log("onSearch");
     console.log(text);
   }
@@ -14,7 +14,7 @@ export default class SearchController extends Component {
       <div className="searchController">
           <div className="searchControllerTopBar">
               <img className="searchLogo"  src="logo.svg"   onClick={this.props.logOut}  alt="" />
-              <input onChange={(event) => this.onSearch(event.target.value)} ref = { element => this.searchBar = element} type="text" className="searchBar" placeholder={this.props.placeholder ? this.props.placeholder : "Search"} autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+              <input onChange={(event) => this.onChangeSearchBar(event.target.value)} ref = { element => this.searchBar = element} type="text" className="searchBar" placeholder={this.props.placeholder ? this.props.placeholder : "Search"} autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
           </div>
       </div>
     );
