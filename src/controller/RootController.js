@@ -1,15 +1,12 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './style.css';
+import '../style.css';
 
 export default class RootController extends Component {
   render() {
     return (
-      <div className="RootController">
+      <div className="rootController">
           TEST
       </div>
     );
   }
 }
-
- 

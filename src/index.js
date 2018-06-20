@@ -1,7 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import RootController from './RootController';
-import registerServiceWorker from './registerServiceWorker';
+import RootController from './controller/RootController';
 
 ReactDOM.render(<RootController />, document.getElementById('root'));
