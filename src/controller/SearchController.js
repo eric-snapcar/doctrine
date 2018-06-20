@@ -5,7 +5,7 @@ export default class SearchController extends Component {
   render() {
     return (
       <div className="searchController">
-          Search
+          <input type="text" id="searchBar" placeholder={this.props.placeholder ? this.props.placeholder : "Search"} autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
       </div>
     );
   }
