@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import '../style.css';
 
-export default class SearchController extends Component {
+export default class HomeController extends Component {
   componentDidMount(){
     this.searchBar.focus();
   }
