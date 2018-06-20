@@ -12,8 +12,10 @@ export default class SearchController extends Component {
   render() {
     return (
       <div className="searchController">
-          <img className="searchLogo"  src="logo.svg"   onClick={this.props.logOut}  alt="" />
-          <input onChange={(event) => this.onSearch(event.target.value)} ref = { element => this.searchBar = element} type="text" className="searchBar" placeholder={this.props.placeholder ? this.props.placeholder : "Search"} autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+          <div className="searchControllerTopBar">
+              <img className="searchLogo"  src="logo.svg"   onClick={this.props.logOut}  alt="" />
+              <input onChange={(event) => this.onSearch(event.target.value)} ref = { element => this.searchBar = element} type="text" className="searchBar" placeholder={this.props.placeholder ? this.props.placeholder : "Search"} autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+          </div>
       </div>
     );
   }
