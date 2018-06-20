@@ -12,10 +12,16 @@
   bottom: 0;
   left: 0;
   display: flex;
-  justify-content: center;
+  align-items: center;
 padding-top: 200px;
+flex-direction: column;
 }
-#searchBar{
+.searchLogo{
+
+  height: 48px;
+  margin-bottom: 20px;
+}
+.searchBar{
   outline: none;
   border: 0px;
   border-radius: 2px;

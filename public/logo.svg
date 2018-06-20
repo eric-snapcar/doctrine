@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="154px" height="28px" viewBox="0 0 154 28" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 47.1 (45422) - http://www.bohemiancoding.com/sketch -->
+    <title>logo</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" font-style="italic" font-size="36" font-family="Helvetica-BoldOblique, Helvetica" font-weight="bold">
+        <g id="logo">
+            <text id="SEARCH">
+                <tspan x="-2" y="27" fill="#3D76EF">S</tspan>
+                <tspan x="22.0117188" y="27" fill="#DC292E">E</tspan>
+                <tspan x="46.0234375" y="27" fill="#F5BC00">A</tspan>
+                <tspan x="72.0214844" y="27" fill="#3D76EF">R</tspan>
+                <tspan x="98.0195312" y="27" fill="#30B446">C</tspan>
+                <tspan x="124.017578" y="27" fill="#DC292E">H</tspan>
+            </text>
+        </g>
+    </g>
+</svg>
