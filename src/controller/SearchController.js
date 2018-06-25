@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import '../style.css';
-
+import SearchService  from '../service/SearchService';
 export default class SearchController extends Component {
   componentDidMount(){
     this.searchBar.focus();
@@ -8,6 +8,7 @@ export default class SearchController extends Component {
   onChangeSearchBar(text){
     console.log("onSearch");
     console.log(text);
+    SearchService.search(text,null);
   }
   render() {
     return (
