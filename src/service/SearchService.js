@@ -3,11 +3,14 @@ const baseUrl = "http://openlibrary.org/search.json";
 export default class SearchService {
   static search(query,callback){
     const callback_ = function(json,error){
-
+      console.log("SearchService search callback");
+      console.log(json);
+      console.log(error);
     }
     // FetchService.get("riders/"+userId+"/planned_bookings" ,null,callback_)
-    console.log("SearchService");
+    console.log("SearchService search");
     console.log(query);
+    this.get([q:query],callback_);
   }
   static header(token){
     let header = new Headers();
