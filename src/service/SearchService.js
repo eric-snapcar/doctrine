@@ -13,7 +13,7 @@ export default class SearchService {
     let header = new Headers();
     return header;
   }
-  static get(path,parameters,callback){
+  static get(parameters,callback){
     let headers = this.header();
     let params =
     {
@@ -21,11 +21,11 @@ export default class SearchService {
         header : header
     };
     if(parameters != null){
-      let url = new URL(baseUrl + path);
+      let url = new URL(baseUrl);
       Object.keys(parameters).forEach(key => {   url.searchParams.append(key, parameters[key]);})
       this.fetch(url.href,params,callback);
     }else {
-      let url = baseUrl + path;
+      let url = baseUrl;
       this.fetch(url,params,callback);
     }
   }
