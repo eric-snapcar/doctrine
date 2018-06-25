@@ -10,14 +10,14 @@ export default class SearchService {
     // FetchService.get("riders/"+userId+"/planned_bookings" ,null,callback_)
     console.log("SearchService search");
     console.log(query);
-    this.get([q:query],callback_);
+    this.get({q:query},callback_);
   }
   static header(token){
     let header = new Headers();
     return header;
   }
   static get(parameters,callback){
-    let headers = this.header();
+    let header = this.header();
     let params =
     {
         method: 'GET',
