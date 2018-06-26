@@ -19,9 +19,7 @@
   flex-direction: column;
 }
 .searchController {
-  display: flex;
-  align-items: center;
-  flex-direction: column;
+
 }
 .searchControllerTopBar{
   display: flex;

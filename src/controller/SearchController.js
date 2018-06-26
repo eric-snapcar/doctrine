@@ -33,10 +33,16 @@ export default class SearchController extends Component {
           </div>
           {(this.state.documents != null) && this.state.documents.map(function(document, idx){
                 return (
-                           <div>{document.title}</div>
+                  <DocumentCell document = {document} />
                         )
            },this)}
       </div>
     );
+  }
+}
+
+class DocumentCell extends React.Component {
+  render(){
+    return(<div>{this.props.document.title}</div>);
   }
 }
