@@ -2,19 +2,27 @@ import React, { Component } from 'react';
 import '../style.css';
 import SearchService  from '../service/SearchService';
 export default class SearchController extends Component {
+  constructor(props){
+    super(props);
+    this.state = {documents:null};
+  }
   componentDidMount(){
     this.searchBar.focus();
   }
   onSearch(text){
-    SearchService.search(text,(searchResult,error)=>{
-      if(error != null){
-        console.log("onSearch error");
-        console.log(error );
-      }else {
-        console.log("onSearch OK");
-        console.log(searchResult);
-      }
-    });
+    this.searchText = text;
+    if(text.length > 2){
+      SearchService.search(text,(searchResult,error)=>{
+        if(error != null){
+          console.log("onSearch error");
+          console.log(error );
+        }else {
+          if(searchResult.searchText == this.searchText){
+            this.setState({documents:searchResult.documents});
+          }
+        }
+      });
+    }
   }
   render() {
     return (

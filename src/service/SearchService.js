@@ -2,17 +2,17 @@
 import SearchResult  from '../object/SearchResult';
 const baseUrl = "http://openlibrary.org/search.json";
 export default class SearchService {
-  static search(query,callback){
+  static search(searchText,callback){
     const callback_ = function(json,error){
       if(error != null){
           callback(null,error);
       }
       else{
-          let searchResult = new SearchResult(json);
+          let searchResult = new SearchResult(json,searchText);
           callback(searchResult,null);
       }
     }
-    this.get({q:query},callback_);
+    this.get({q:searchText},callback_);
   }
   static header(token){
     let header = new Headers();
