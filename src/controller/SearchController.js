@@ -31,11 +31,13 @@ export default class SearchController extends Component {
               <img className="searchLogo"  src="logo.svg"   onClick={this.props.logOut}  alt="" />
               <input onChange={(event) => this.onSearch(event.target.value)} ref = { element => this.searchBar = element} type="text" className="searchBar" placeholder={this.props.placeholder ? this.props.placeholder : "Search"} autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
           </div>
+          <div className="searchControllerResults">
           {(this.state.documents != null) && this.state.documents.map(function(document, idx){
                 return (
                   <DocumentCell document = {document} />
                         )
            },this)}
+           </div>
       </div>
     );
   }
@@ -43,6 +45,11 @@ export default class SearchController extends Component {
 
 class DocumentCell extends React.Component {
   render(){
-    return(<div>{this.props.document.title}</div>);
+    return(
+      <div className="documentCell">
+          <div className="title">{this.props.document.title}</div>
+          <div className="details">{this.props.document.author_name}</div>
+      </div>
+    );
   }
 }

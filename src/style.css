@@ -21,6 +21,24 @@
 .searchController {
 
 }
+.searchControllerResults{
+  margin-left: 150px;
+  margin-top: 43px;
+}
+.documentCell {
+  margin-bottom: 20px;
+  font-family:arial, sans-serif;
+}
+.documentCell .title{
+  color: #1a0dab;
+  font-size:18px;
+  font-weight:400;
+}
+.documentCell .details{
+    color: #006621;
+    font-size:14px;
+    font-weight:400;
+}
 .searchControllerTopBar{
   display: flex;
   width: 100%;
