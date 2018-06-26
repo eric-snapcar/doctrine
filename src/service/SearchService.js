@@ -4,10 +4,13 @@ const baseUrl = "http://openlibrary.org/search.json";
 export default class SearchService {
   static search(query,callback){
     const callback_ = function(json,error){
-      console.log("SearchService search callback");
-      console.log(json);
-      console.log(error);
-      let searchResult = new SearchResult(json);
+      if(error != null){
+          callback(null,error);
+      }
+      else{
+          let searchResult = new SearchResult(json);
+          callback(searchResult,null);
+      }
     }
     this.get({q:query},callback_);
   }
@@ -33,8 +36,6 @@ export default class SearchService {
   }
   static fetch(url, params, callback){
     fetch(url, params).then(function(response) {
-      console.log("SerchService");
-      console.log(response);
       if(response.ok || response.status == 400){
         return response.text();
       }
