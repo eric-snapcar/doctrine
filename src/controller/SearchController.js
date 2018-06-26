@@ -31,6 +31,11 @@ export default class SearchController extends Component {
               <img className="searchLogo"  src="logo.svg"   onClick={this.props.logOut}  alt="" />
               <input onChange={(event) => this.onSearch(event.target.value)} ref = { element => this.searchBar = element} type="text" className="searchBar" placeholder={this.props.placeholder ? this.props.placeholder : "Search"} autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
           </div>
+          {(this.state.documents != null) && this.state.documents.map(function(document, idx){
+                return (
+                           <div>{document.title}</div>
+                        )
+           },this)}
       </div>
     );
   }
