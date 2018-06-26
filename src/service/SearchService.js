@@ -1,4 +1,5 @@
 // http://openlibrary.org/search.json?q=the+lord+of+the+rings
+import SearchResult  from '../object/SearchResult';
 const baseUrl = "http://openlibrary.org/search.json";
 export default class SearchService {
   static search(query,callback){
@@ -6,10 +7,8 @@ export default class SearchService {
       console.log("SearchService search callback");
       console.log(json);
       console.log(error);
+      let searchResult = new SearchResult(json);
     }
-    // FetchService.get("riders/"+userId+"/planned_bookings" ,null,callback_)
-    console.log("SearchService search");
-    console.log(query);
     this.get({q:query},callback_);
   }
   static header(token){
@@ -46,15 +45,15 @@ export default class SearchService {
       if(text){
           try {
               var json = JSON.parse(text);
-              console.log(json);
+              callback(json,null);
           } catch(error) {
-              console.log(error);
+              callback(null,error);
           }
       }else {
           callback(null,null,null);
       }
     }).catch(function(response) {
-        console.log(response);
+        callback(null,response);
     });
   }
 }
