@@ -23,7 +23,14 @@
 }
 .searchControllerResults{
   margin-left: 150px;
-  margin-top: 43px;
+}
+.searchControllerCount{
+  color: rgb(128, 128, 128);
+  font-size: 13px;
+  height: 43px;
+  display: flex;
+  align-items: center;
+  font-family: arial, sans-serif;
 }
 .documentCell {
   margin-bottom: 20px;

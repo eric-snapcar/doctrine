@@ -4,7 +4,7 @@ import SearchService  from '../service/SearchService';
 export default class SearchController extends Component {
   constructor(props){
     super(props);
-    this.state = {documents:null};
+    this.state = {results:null};
   }
   componentDidMount(){
     this.searchBar.focus();
@@ -18,7 +18,7 @@ export default class SearchController extends Component {
           console.log(error );
         }else {
           if(searchResult.searchText == this.searchText){
-            this.setState({documents:searchResult.documents});
+            this.setState({results:searchResult});
           }
         }
       });
@@ -31,13 +31,18 @@ export default class SearchController extends Component {
               <img className="searchLogo"  src="logo.svg"   onClick={this.props.logOut}  alt="" />
               <input onChange={(event) => this.onSearch(event.target.value)} ref = { element => this.searchBar = element} type="text" className="searchBar" placeholder={this.props.placeholder ? this.props.placeholder : "Search"} autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
           </div>
-          <div className="searchControllerResults">
-          {(this.state.documents != null) && this.state.documents.map(function(document, idx){
-                return (
-                  <DocumentCell document = {document} />
-                        )
-           },this)}
-           </div>
+
+          {(this.state.results != null) &&
+            <div className="searchControllerResults">
+            <div className="searchControllerCount">{this.state.results.numFound} books found</div>
+                {this.state.results.documents.map(function(document, idx){
+                    return (
+                      <DocumentCell document = {document} />
+                            )
+                },this)}
+            </div>
+          }
+
       </div>
     );
   }
