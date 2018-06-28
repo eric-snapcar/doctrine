@@ -1,7 +1,10 @@
+
 import React, { Component } from 'react';
 import '../style.css';
 import SearchService  from '../service/SearchService';
 import { Button, Intent, Spinner } from "@blueprintjs/core";
+
+
 export default class SearchController extends Component {
   constructor(props){
     super(props);
@@ -12,7 +15,7 @@ export default class SearchController extends Component {
   }
   onTapSearchButton(){
     let text = this.state.searchText;
-    if(text.length > 2){
+    if(text != null && text.length > 2){
       this.setState({loading:true});
       SearchService.search(text,(searchResult,error)=>{
         this.setState({loading:false});
@@ -33,9 +36,15 @@ export default class SearchController extends Component {
           <div className="searchControllerTopBar">
               <img className="searchLogo"  src="logo.svg"   onClick={this.props.logOut}  alt="" />
               <input value={this.state.searchText}
+              onKeyPress={(event) => {
+                  if(event.key == 'Enter'){
+                    this.onTapSearchButton();
+                  }
+                }
+              }
               onChange={(event) => {
-                let searchText = event.target.value;
-                this.setState({searchText:searchText,error:null})
+                  let searchText = event.target.value;
+                  this.setState({searchText:searchText,error:null})
                 }
               }
               ref = { element => this.searchBar = element}
