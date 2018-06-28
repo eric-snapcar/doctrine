@@ -17,7 +17,6 @@ export default class SearchController extends Component {
       SearchService.search(text,(searchResult,error)=>{
         this.setState({loading:false});
         if(error != null){
-          console.log("onSearch error");
           console.log(error );
           this.setState({error:error});
         }else {
