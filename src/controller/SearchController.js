@@ -5,7 +5,7 @@ import { Button, Intent, Spinner } from "@blueprintjs/core";
 export default class SearchController extends Component {
   constructor(props){
     super(props);
-    this.state = {results:null,searchText:null,error:null};
+    this.state = {results:null,searchText:null,error:null,loading:false};
   }
   componentDidMount(){
     this.searchBar.focus();
@@ -13,10 +13,13 @@ export default class SearchController extends Component {
   onTapSearchButton(){
     let text = this.state.searchText;
     if(text.length > 2){
+      this.setState({loading:true});
       SearchService.search(text,(searchResult,error)=>{
+        this.setState({loading:false});
         if(error != null){
           console.log("onSearch error");
           console.log(error );
+          this.setState({error:error});
         }else {
           if(searchResult.searchText == this.state.searchText){
             this.setState({results:searchResult});
@@ -38,7 +41,7 @@ export default class SearchController extends Component {
               }
               ref = { element => this.searchBar = element}
               type="text" className="searchBar" placeholder={this.props.placeholder ? this.props.placeholder : "Search"} autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
-                  <Button   className="pt-large" onClick={() => this.onTapSearchButton()} iconName="search"  loading={this.state.loading} text="Search"/>
+                  <Button  loading={this.state.loading} className="pt-large" onClick={() => this.onTapSearchButton()} iconName="search"  loading={this.state.loading} text="Search"/>
             </div>
 
           {(this.state.results != null) &&
