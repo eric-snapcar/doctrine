@@ -1,24 +1,24 @@
 import React, { Component } from 'react';
 import '../style.css';
 import SearchService  from '../service/SearchService';
-import { Button, Intent, FormGroup, Spinner } from "@blueprintjs/core";
+import { Button, Intent, Spinner } from "@blueprintjs/core";
 export default class SearchController extends Component {
   constructor(props){
     super(props);
-    this.state = {results:null};
+    this.state = {results:null,searchText:null,error:null};
   }
   componentDidMount(){
     this.searchBar.focus();
   }
-  onSearch(text){
-    this.searchText = text;
+  onTapSearchButton(){
+    let text = this.state.searchText;
     if(text.length > 2){
       SearchService.search(text,(searchResult,error)=>{
         if(error != null){
           console.log("onSearch error");
           console.log(error );
         }else {
-          if(searchResult.searchText == this.searchText){
+          if(searchResult.searchText == this.state.searchText){
             this.setState({results:searchResult});
           }
         }
@@ -30,8 +30,16 @@ export default class SearchController extends Component {
       <div className="searchController">
           <div className="searchControllerTopBar">
               <img className="searchLogo"  src="logo.svg"   onClick={this.props.logOut}  alt="" />
-              <input onChange={(event) => this.onSearch(event.target.value)} ref = { element => this.searchBar = element} type="text" className="searchBar" placeholder={this.props.placeholder ? this.props.placeholder : "Search"} autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
-          </div>
+              <input value={this.state.searchText}
+              onChange={(event) => {
+                let searchText = event.target.value;
+                this.setState({searchText:searchText,error:null})
+                }
+              }
+              ref = { element => this.searchBar = element}
+              type="text" className="searchBar" placeholder={this.props.placeholder ? this.props.placeholder : "Search"} autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+                  <Button   className="pt-large" onClick={() => this.onTapSearchButton()} iconName="search"  loading={this.state.loading} text="Search"/>
+            </div>
 
           {(this.state.results != null) &&
             <div className="searchControllerResults">

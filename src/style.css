@@ -1,3 +1,5 @@
+@import "~@blueprintjs/core/lib/css/blueprint.css";
+@import "~@blueprintjs/icons/lib/css/blueprint-icons.css";
 .rootController {
   position: absolute;
   top: 0;
@@ -67,6 +69,7 @@ border-bottom:rgb(235, 235, 235) solid 1px;
   height: 48px;
 }
 .searchBar{
+  box-sizing : content-box;
   outline: none;
   border: 0px;
   border-radius: 2px;
@@ -76,7 +79,7 @@ border-bottom:rgb(235, 235, 235) solid 1px;
   padding-left: 16px;
   padding-top: 10px;
   padding-bottom:9px;
-  margin: 10 10 10 33;
+  margin-right: 10px;
   box-shadow: 0 2px 2px 0 rgba(0,0,0,0.16), 0 0 0 1px rgba(0,0,0,0.08);
   transition: box-shadow 200ms cubic-bezier(0.4, 0.0, 0.2, 1);
   width: 500px;
