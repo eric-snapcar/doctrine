@@ -20,7 +20,6 @@ export default class SearchController extends Component {
       SearchService.search(text,(searchResult,error)=>{
         this.setState({loading:false});
         if(error != null){
-          console.log(error );
           this.setState({error:error});
         }else {
           if(searchResult.searchText == this.state.searchText){
@@ -52,9 +51,9 @@ export default class SearchController extends Component {
                   <Button  loading={this.state.loading} className="pt-large" onClick={() => this.onTapSearchButton()} iconName="search"  loading={this.state.loading} text="Search"/>
             </div>
 
-          {(this.state.results != null) &&
+          {(!this.state.loading && this.state.results != null) &&
             <div className="searchControllerResults">
-            <div className="searchControllerCount">{this.state.results.numFound} books found</div>
+                <div className="searchControllerCount">{this.state.results.numFound} books found</div>
                 {this.state.results.documents.map(function(document, idx){
                     return (
                       <DocumentCell document = {document} />
@@ -62,6 +61,7 @@ export default class SearchController extends Component {
                 },this)}
             </div>
           }
+          {this.state.loading && <div className="searchControllerLoadingWrapper" ><Spinner/></div>}
 
       </div>
     );
