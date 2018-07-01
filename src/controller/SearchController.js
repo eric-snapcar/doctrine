@@ -14,8 +14,6 @@ export default class SearchController extends Component {
     this.searchBar.focus();
   }
   onTapSearchButton(){
-    this.setState({error:"test"});
-    /*
     let text = this.state.searchText;
     if(text != null && text.length > 2){
       this.setState({loading:true});
@@ -30,19 +28,11 @@ export default class SearchController extends Component {
         }
       });
     }
-    */
   }
   render() {
     return (
       <div className="searchController">
-          <Dialog isCloseButtonShown={false} title="Error" icon="error" isOpen={this.state.error != null} onClose={() => this.setState({error:null})} canOutsideClickCancel={true}>
-              <div className="pt-dialog-body">An error has occured please try again</div>
-              <div className="pt-dialog-footer">
-                <div className="pt-dialog-footer-actions">
-                  <Button text="Ok" intent={Intent.PRIMARY} onClick={() => this.setState({error:null})} />
-                </div>
-              </div>
-          </Dialog>
+          <SearchErrorDialog isOpen={this.state.error != null} onClose={() => this.setState({error:null})} />
           <div className="searchControllerTopBar">
               <img className="searchLogo"  src="logo.svg"   onClick={this.props.logOut}  alt="" />
               <input value={this.state.searchText}
@@ -78,7 +68,20 @@ export default class SearchController extends Component {
     );
   }
 }
-
+class SearchErrorDialog extends React.Component {
+  render(){
+    return(
+      <Dialog isCloseButtonShown={false} title="Error" icon="error" isOpen={this.props.isOpen} onClose={this.props.onClose} canOutsideClickCancel={true}>
+          <div className="pt-dialog-body">An error has occured please try again</div>
+          <div className="pt-dialog-footer">
+            <div className="pt-dialog-footer-actions">
+              <Button text="Ok" intent={Intent.PRIMARY} onClick={this.props.onClose} />
+            </div>
+          </div>
+      </Dialog>
+    );
+  }
+}
 class SearchCell extends React.Component {
   render(){
     return(
