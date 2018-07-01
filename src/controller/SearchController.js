@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import '../style.css';
 import SearchService  from '../service/SearchService';
-import { Button, Intent, Spinner, Dialog, Popover } from "@blueprintjs/core";
+import { Button, Intent, Spinner, Dialog, Popover, Position } from "@blueprintjs/core";
 
 
 export default class SearchController extends Component {
@@ -91,7 +91,7 @@ class SearchErrorDialog extends React.Component {
 class SearchPopOver extends React.Component {
   render(){
     return(
-      <Popover isOpen={this.props.isOpen} canOutsideClickClose={true} onClose={this.props.onClose}>
+      <Popover position={Position.TOP_LEFT} isOpen={this.props.isOpen} canOutsideClickClose={true} onClose={this.props.onClose}>
           {this.props.children}
           <div>TEST</div>
       </Popover>
