@@ -2,13 +2,13 @@
 import React, { Component } from 'react';
 import '../style.css';
 import SearchService  from '../service/SearchService';
-import { Button, Intent, Spinner, Dialog } from "@blueprintjs/core";
+import { Button, Intent, Spinner, Dialog, Popover } from "@blueprintjs/core";
 
 
 export default class SearchController extends Component {
   constructor(props){
     super(props);
-    this.state = {results:null,searchText:null,error:null,loading:false};
+    this.state = {results:null,searchText:null,error:null,loading:false,showPopOver:false};
   }
   componentDidMount(){
     this.searchBar.focus();
@@ -27,6 +27,8 @@ export default class SearchController extends Component {
           }
         }
       });
+    }else {
+      this.setState({showPopOver:true});
     }
   }
   render() {
@@ -35,20 +37,24 @@ export default class SearchController extends Component {
           <SearchErrorDialog isOpen={this.state.error != null} onClose={() => this.setState({error:null})} />
           <div className="searchControllerTopBar">
               <img className="searchLogo"  src="logo.svg"   onClick={this.props.logOut}  alt="" />
-              <input value={this.state.searchText}
-              onKeyPress={(event) => {
-                  if(event.key == 'Enter'){
-                    this.onTapSearchButton();
+
+              <SearchPopOver isOpen={this.state.showPopOver} canOutsideClickClose={true} onClose={() => this.setState({showPopOver:false})}>
+                  <input value={this.state.searchText}
+                  onKeyPress={(event) => {
+                      if(event.key == 'Enter'){
+                        this.onTapSearchButton();
+                      }
+                    }
                   }
-                }
-              }
-              onChange={(event) => {
-                  let searchText = event.target.value;
-                  this.setState({searchText:searchText,error:null})
-                }
-              }
-              ref = { element => this.searchBar = element}
-              type="text" className="searchBar" placeholder={this.props.placeholder ? this.props.placeholder : "Search"} autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+                  onChange={(event) => {
+                      let searchText = event.target.value;
+                      this.setState({searchText:searchText,error:null})
+                    }
+                  }
+                  ref = { element => this.searchBar = element}
+                  type="text" className="searchBar" placeholder={this.props.placeholder ? this.props.placeholder : "Search"} autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"
+                  />
+              </SearchPopOver>
                   <Button  loading={this.state.loading} className="pt-large" onClick={() => this.onTapSearchButton()} iconName="search"  loading={this.state.loading} text="Search"/>
             </div>
 
@@ -82,6 +88,17 @@ class SearchErrorDialog extends React.Component {
     );
   }
 }
+class SearchPopOver extends React.Component {
+  render(){
+    return(
+      <Popover isOpen={this.props.isOpen} canOutsideClickClose={true} onClose={this.props.onClose}>
+          {this.props.children}
+          <div>TEST</div>
+      </Popover>
+    )
+  }
+}
+
 class SearchCell extends React.Component {
   render(){
     return(
