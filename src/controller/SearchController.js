@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import '../style.css';
 import SearchService  from '../service/SearchService';
-import { Button, Intent, Spinner } from "@blueprintjs/core";
+import { Button, Intent, Spinner, Alert } from "@blueprintjs/core";
 
 
 export default class SearchController extends Component {
@@ -14,6 +14,8 @@ export default class SearchController extends Component {
     this.searchBar.focus();
   }
   onTapSearchButton(){
+    this.setState({error:"test"});
+    /*
     let text = this.state.searchText;
     if(text != null && text.length > 2){
       this.setState({loading:true});
@@ -28,10 +30,12 @@ export default class SearchController extends Component {
         }
       });
     }
+    */
   }
   render() {
     return (
       <div className="searchController">
+      <Alert isOpen={this.state.error != null} />
           <div className="searchControllerTopBar">
               <img className="searchLogo"  src="logo.svg"   onClick={this.props.logOut}  alt="" />
               <input value={this.state.searchText}
@@ -53,10 +57,10 @@ export default class SearchController extends Component {
 
           {(!this.state.loading && this.state.results != null) &&
             <div className="searchControllerResults">
-                <div className="searchControllerCount">{this.state.results.numFound} books found</div>
+                <div className="searchHeader">{this.state.results.numFound} books found</div>
                 {this.state.results.documents.map(function(document, idx){
                     return (
-                      <DocumentCell document = {document} />
+                      <SearchCell document = {document} />
                             )
                 },this)}
             </div>
@@ -68,7 +72,7 @@ export default class SearchController extends Component {
   }
 }
 
-class DocumentCell extends React.Component {
+class SearchCell extends React.Component {
   render(){
     return(
       <div className="documentCell">

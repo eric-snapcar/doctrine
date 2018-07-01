@@ -8,10 +8,8 @@
   left: 0;
 }
 .searchControllerLoadingWrapper{
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding-top: 22.5px;
+padding-left: 150px;
+  padding-top: 27.5px;
 }
 .homeController, .searchController  {
   position: absolute;
@@ -32,7 +30,7 @@
 .searchControllerResults{
   margin-left: 150px;
 }
-.searchControllerCount{
+.searchHeader{
   color: rgb(128, 128, 128);
   font-size: 13px;
   height: 43px;
