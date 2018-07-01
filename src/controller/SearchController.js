@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import '../style.css';
 import SearchService  from '../service/SearchService';
-import { Button, Intent, Spinner, Alert } from "@blueprintjs/core";
+import { Button, Intent, Spinner, Dialog } from "@blueprintjs/core";
 
 
 export default class SearchController extends Component {
@@ -35,7 +35,14 @@ export default class SearchController extends Component {
   render() {
     return (
       <div className="searchController">
-      <Alert isOpen={this.state.error != null} />
+          <Dialog isCloseButtonShown={false} title="Error" icon="error" isOpen={this.state.error != null} onClose={() => this.setState({error:null})} canOutsideClickCancel={true}>
+              <div className="pt-dialog-body">An error has occured please try again</div>
+              <div className="pt-dialog-footer">
+                <div className="pt-dialog-footer-actions">
+                  <Button text="Ok" intent={Intent.PRIMARY} onClick={() => this.setState({error:null})} />
+                </div>
+              </div>
+          </Dialog>
           <div className="searchControllerTopBar">
               <img className="searchLogo"  src="logo.svg"   onClick={this.props.logOut}  alt="" />
               <input value={this.state.searchText}
