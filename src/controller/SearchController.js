@@ -29,6 +29,7 @@ export default class SearchController extends Component {
       });
     }else {
       this.setState({showPopOver:true});
+      this.searchBar.focus();
     }
   }
   render() {
@@ -48,7 +49,10 @@ export default class SearchController extends Component {
                   }
                   onChange={(event) => {
                       let searchText = event.target.value;
-                      this.setState({searchText:searchText,showPopOver:false})
+                      this.setState({searchText:searchText })
+                      if(searchText.length > 2){
+                        this.setState({ showPopOver:false})
+                      }
                     }
                   }
                   ref = { element => this.searchBar = element}
@@ -68,7 +72,7 @@ export default class SearchController extends Component {
                 },this)}
             </div>
           }
-          {this.state.loading && <div className="searchControllerLoadingWrapper" ><Spinner/></div>}
+          {this.state.loading && <div className="searchControllerLoadingWrapper" ><Spinner className="pt-small"/></div>}
 
       </div>
     );
