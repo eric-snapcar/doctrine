@@ -91,9 +91,12 @@ class SearchErrorDialog extends React.Component {
 class SearchPopOver extends React.Component {
   render(){
     return(
-      <Popover autoFocus={false} position={Position.TOP_LEFT} isOpen={this.props.isOpen} canOutsideClickClose={true} onClose={this.props.onClose}>
+      <Popover popoverClassName="searchPopOver" modifiers ={{"modifiers":{offset:"100px"}}} autoFocus={false} position={Position.BOTTOM_LEFT} isOpen={this.props.isOpen} canOutsideClickClose={true} onClose={this.props.onClose}>
           {this.props.children}
-          <div>TEST</div>
+          <div className="popOver" >
+            <div className="title">Search text too short</div>
+            <div className="details">Your search text must be at least 3 characters long</div>
+          </div>
       </Popover>
     )
   }

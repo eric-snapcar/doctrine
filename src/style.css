@@ -1,5 +1,27 @@
 @import "~@blueprintjs/core/lib/css/blueprint.css";
 @import "~@blueprintjs/icons/lib/css/blueprint-icons.css";
+
+.popOver {
+  padding: 13px;
+  padding-top: 9px;
+  padding-bottom: 10px;
+  padding-right: 11px;
+  max-width: 220px;
+}
+.searchPopOver .pt-popover-arrow{
+  left: 94px !important;
+}
+.popOver .title{
+    color:rgb(29, 33, 41);
+    font-size:14px;
+    font-weight:700;
+}
+.popOver .details {
+    color:rgb(128, 128, 128);
+    font-size:12px;
+}
+
+
 .pt-button{
   outline: none;
 }
