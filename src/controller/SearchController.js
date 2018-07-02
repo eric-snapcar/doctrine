@@ -48,7 +48,7 @@ export default class SearchController extends Component {
                   }
                   onChange={(event) => {
                       let searchText = event.target.value;
-                      this.setState({searchText:searchText,error:null})
+                      this.setState({searchText:searchText,showPopOver:false})
                     }
                   }
                   ref = { element => this.searchBar = element}
@@ -91,7 +91,7 @@ class SearchErrorDialog extends React.Component {
 class SearchPopOver extends React.Component {
   render(){
     return(
-      <Popover position={Position.TOP_LEFT} isOpen={this.props.isOpen} canOutsideClickClose={true} onClose={this.props.onClose}>
+      <Popover autoFocus={false} position={Position.TOP_LEFT} isOpen={this.props.isOpen} canOutsideClickClose={true} onClose={this.props.onClose}>
           {this.props.children}
           <div>TEST</div>
       </Popover>
