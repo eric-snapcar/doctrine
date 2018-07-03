@@ -110,6 +110,7 @@ class SearchCell extends React.Component {
   render(){
     return(
       <div className="documentCell">
+          <img   src="logo.svg"/>
           <div className="title">{this.props.document.title}</div>
           <div className="details">{this.props.document.author_name}</div>
       </div>
