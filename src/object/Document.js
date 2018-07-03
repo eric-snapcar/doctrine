@@ -9,7 +9,10 @@ export default class Document {
       }
   }
   imageUrl(){
-    return "http://covers.openlibrary.org/b/id/"+this.cover_i+".jpg";
+    if(this.cover_i != null){
+      return "http://covers.openlibrary.org/b/id/"+this.cover_i+".jpg";
+    }
+    return null;
   }
   targetUrl(){
     return "http://covers.openlibrary.org/books/"+this.key;
