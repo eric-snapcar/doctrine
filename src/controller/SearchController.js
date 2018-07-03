@@ -110,7 +110,10 @@ class SearchCell extends React.Component {
   render(){
     return(
       <div className="documentCell">
-          <img   src={this.props.document.imageUrl()}/>
+          {this.props.document.imageUrl()
+            ? <img   src={this.props.document.imageUrl()}/>
+            : "NO IMAGE"
+          }
           <div className="title">{this.props.document.title}</div>
           <div className="details">{this.props.document.author_name}</div>
       </div>
