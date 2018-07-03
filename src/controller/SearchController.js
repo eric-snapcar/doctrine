@@ -109,13 +109,14 @@ class SearchPopOver extends React.Component {
 class SearchCell extends React.Component {
   render(){
     return(
-      <div className="documentCell">
+      <div className="searchCell">
           {this.props.document.imageUrl()
-            ? <img   src={this.props.document.imageUrl()}/>
-            : "NO IMAGE"
+            && <div className="searchCellImage"><img src={this.props.document.imageUrl()}/></div>
           }
-          <div className="title">{this.props.document.title}</div>
-          <div className="details">{this.props.document.author_name}</div>
+          <div className="searchCellText">
+              <div className="title">{this.props.document.title}</div>
+              {this.props.document.author_name && <div className="details">Author: {this.props.document.author_name}</div>}
+          </div>
       </div>
     );
   }

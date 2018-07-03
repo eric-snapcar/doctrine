@@ -63,19 +63,39 @@ padding-left: 150px;
   align-items: center;
   font-family: arial, sans-serif;
 }
-.documentCell {
-  margin-bottom: 20px;
+.searchCell {
+  margin-bottom: 26px;
   font-family:arial, sans-serif;
+  display: flex;
+  cursor: default;
+  min-height: 90px;
 }
-.documentCell .title{
+.searchCell .title{
+  cursor: pointer;
   color: #1a0dab;
   font-size:18px;
   font-weight:400;
 }
-.documentCell .details{
+.searchCell .title:hover {
+    text-decoration: underline;
+}
+.searchCell .details{
     color: #006621;
     font-size:14px;
     font-weight:400;
+}
+.searchCellText{
+}
+.searchCellImage {
+  cursor: pointer;
+  margin-right: 8px;
+  height: 100px;
+  width: 100px;
+  overflow: hidden;
+      border: 1px solid #ebebeb;
+}
+.searchCellImage img{
+  width: 100px;
 }
 .searchControllerTopBar{
   display: flex;
