@@ -66,7 +66,7 @@ export default class SearchController extends Component {
             <div className="searchControllerResults">
                 <div className="searchHeader">{this.state.results.numFound} books found</div>
                 <SearchDocumentList documents={this.state.results.documents} />
-                <SearchPagination first={1} max={5} active={1}/>
+                <SearchPagination first={1} max={Math.floor(this.state.results.numFound/10)} active={1} onSelect={(page) => console.log(page)}/>
             </div>
           }
           {this.state.loading && <div className="searchControllerLoadingWrapper" ><Spinner className="pt-small"/></div>}
@@ -119,10 +119,11 @@ class SearchPagination extends React.Component {
   render(){
     let active = this.props.active;
     let items = [];
-    let limit = Math.min(this.props.first + 9, this.props.max);
-    for (let number = this.props.first; number <= limit; number++) {
+    let start = this.props.first;
+    let end = Math.min(this.props.first + 9, this.props.max);
+    for (let page = start; page <= end; page++) {
         items.push(
-            <Pagination.Item active={number === active}>{number}</Pagination.Item>
+            <Pagination.Item active={page === active} onClick={()=>this.props.onSelect(page)}>{page}</Pagination.Item>
         );
     }
     return(
