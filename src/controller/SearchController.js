@@ -13,19 +13,28 @@ export default class SearchController extends Component {
   componentDidMount(){
     this.searchBar.focus();
   }
+  onSelectPage(page){
+    this.setState({page:page});
+    if(page*10 > this.state.results.start + 100){
+      this.search(this.state.searchText,Math.ceil(page/10),false);
+    }
+    else if(page*10 <= this.state.results.start ){
+      this.search(this.state.searchText,Math.ceil(page/10),false);
+    }
+  }
   onTapSearchButton(){
     let text = this.state.searchText;
     if(text != null && text.length > 2){
       this.setState({page:1});
-      this.search(text,1);
+      this.search(text,1,true);
     }else {
       this.setState({showPopOver:true});
       this.searchBar.focus();
     }
   }
-  search(text,page){
+  search(text,page,timeout){
     this.setState({loading:true});
-    SearchService.search(text,page,(searchResult,error)=>{
+    SearchService.search(text,page,timeout,(searchResult,error)=>{
       this.setState({loading:false});
       if(error != null){
         this.setState({error:error});
@@ -70,8 +79,8 @@ export default class SearchController extends Component {
           {(!this.state.loading && this.state.results != null) &&
             <div className="searchControllerResults">
                 <div className="searchHeader">{this.state.results.numFound} books found</div>
-                <SearchDocumentList documents={this.state.results.documents} />
-                <SearchPagination start={Math.max(this.state.page - 5,1)} max={Math.floor(this.state.results.numFound/10)} active={this.state.page} onSelect={(page) => this.setState({page:page})}/>
+                <SearchDocumentList results={this.state.results} page={this.state.page} />
+                <SearchPagination start={Math.max(this.state.page - 5,1)} max={Math.floor(this.state.results.numFound/10)} active={this.state.page} onSelect={(page) => this.onSelectPage(page)}/>
             </div>
           }
           {this.state.loading && <div className="searchControllerLoadingWrapper" ><Spinner className="pt-small"/></div>}
@@ -82,9 +91,10 @@ export default class SearchController extends Component {
 }
 class SearchDocumentList extends React.Component {
   render(){
+    let documents = this.props.results.documents.slice(this.props.page*10-10-this.props.results.start,this.props.page*10-this.props.results.start)
     return(
       <div>
-      {this.props.documents.map(function(document, idx){
+      {documents.map(function(document, idx){
           return (
             <SearchCell document = {document} />
                   )

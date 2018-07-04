@@ -3,11 +3,16 @@ import SearchResult  from '../object/SearchResult';
 const baseUrl = "http://openlibrary.org/search.json";
 let cache ={};
 export default class SearchService {
-  static search(searchText,page,callback){
+  static search(searchText,page,timeout,callback){
     if(cache[searchText] != null && cache[searchText][page] != null){
-      setTimeout(function () {
+      if(timeout){
+        setTimeout(function () {
+          callback(cache[searchText][page],null);
+        }, 50);
+      }
+      else {
         callback(cache[searchText][page],null);
-      }, 50);
+      }
     }
     else {
       const callback_ = function(json,error){
