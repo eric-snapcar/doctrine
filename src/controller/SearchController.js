@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import '../style.css';
 import SearchService  from '../service/SearchService';
 import { Button, Intent, Spinner, Dialog, Popover, Position } from "@blueprintjs/core";
-
+import { Pagination } from 'react-bootstrap';
 
 export default class SearchController extends Component {
   constructor(props){
@@ -73,7 +73,7 @@ export default class SearchController extends Component {
             </div>
           }
           {this.state.loading && <div className="searchControllerLoadingWrapper" ><Spinner className="pt-small"/></div>}
-
+          <SearchPagination/>
       </div>
     );
   }
@@ -105,16 +105,33 @@ class SearchPopOver extends React.Component {
     )
   }
 }
-
+class SearchPagination extends React.Component {
+  render(){
+    let active = 7;
+    let items = [];
+    for (let number = 1; number <= 10; number++) {
+        items.push(
+            <Pagination.Item active={number === active}>{number}</Pagination.Item>
+        );
+    }
+    return(
+      <Pagination bsSize="small">{items}</Pagination>
+    );
+  }
+}
 class SearchCell extends React.Component {
+  openUrl(){
+    var win = window.open(this.props.document.targetUrl(), '_blank');
+    win.focus();
+  }
   render(){
     return(
       <div className="searchCell">
           {this.props.document.imageUrl()
-            && <div className="searchCellImage"><img src={this.props.document.imageUrl()}/></div>
+            && <div onClick={()=> this.openUrl()} className="searchCellImage"><img src={this.props.document.imageUrl()}/></div>
           }
           <div className="searchCellText">
-              <div className="title">{this.props.document.title}</div>
+              <div onClick={()=> this.openUrl()} className="title">{this.props.document.title}</div>
               {this.props.document.author_name && <div className="details">Author: {this.props.document.author_name}</div>}
           </div>
       </div>

@@ -6,15 +6,16 @@ export default class Document {
         this.author_name = data.author_name;
         this.key = data.key;
         this.cover_i = data.cover_i;
+        console.log(data);
       }
   }
   imageUrl(){
     if(this.cover_i != null){
-      return "http://covers.openlibrary.org/b/id/"+this.cover_i+".jpg";
+      return "http://covers.openlibrary.org/b/id/"+this.cover_i+"-M.jpg";
     }
     return null;
   }
   targetUrl(){
-    return "http://covers.openlibrary.org/books/"+this.key;
+    return "https://covers.openlibrary.org/books"+this.key;
   }
 }

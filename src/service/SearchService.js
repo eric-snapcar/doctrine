@@ -9,10 +9,11 @@ export default class SearchService {
       }
       else{
           let searchResult = new SearchResult(json,searchText);
+          console.log(json);
           callback(searchResult,null);
       }
     }
-    this.get({q:searchText},callback_);
+    this.get({q:searchText,page:800},callback_);
   }
   static header(token){
     let header = new Headers();
