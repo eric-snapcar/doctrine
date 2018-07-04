@@ -65,15 +65,24 @@ export default class SearchController extends Component {
           {(!this.state.loading && this.state.results != null) &&
             <div className="searchControllerResults">
                 <div className="searchHeader">{this.state.results.numFound} books found</div>
-                {this.state.results.documents.map(function(document, idx){
-                    return (
-                      <SearchCell document = {document} />
-                            )
-                },this)}
+                <SearchDocumentList documents={this.state.results.documents} />
             </div>
           }
           {this.state.loading && <div className="searchControllerLoadingWrapper" ><Spinner className="pt-small"/></div>}
           <SearchPagination first={1} max={5} active={1}/>
+      </div>
+    );
+  }
+}
+class SearchDocumentList extends React.Component {
+  render(){
+    return(
+      <div>
+      {this.props.documents.map(function(document, idx){
+          return (
+            <SearchCell document = {document} />
+                  )
+      },this)}
       </div>
     );
   }

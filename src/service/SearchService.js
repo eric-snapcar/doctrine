@@ -1,19 +1,30 @@
 // http://openlibrary.org/search.json?q=the+lord+of+the+rings
 import SearchResult  from '../object/SearchResult';
 const baseUrl = "http://openlibrary.org/search.json";
+let cache ={};
 export default class SearchService {
   static search(searchText,page,callback){
-    const callback_ = function(json,error){
-      if(error != null){
-          callback(null,error);
-      }
-      else{
-          let searchResult = new SearchResult(json,searchText);
-          console.log(json);
-          callback(searchResult,null);
-      }
+    if(cache[searchText] != null && cache[searchText][page] != null){
+      setTimeout(function () {
+        callback(cache[searchText][page],null);
+      }, 50);
     }
-    this.get({q:searchText,page:page},callback_);
+    else {
+      const callback_ = function(json,error){
+        if(error != null){
+            callback(null,error);
+        }
+        else{
+            let searchResult = new SearchResult(json,searchText);
+            if(cache[searchText] == null){
+              cache[searchText] = {};
+            }
+            cache[searchText][page] = searchResult;
+            callback(searchResult,null);
+        }
+      }
+      this.get({q:searchText,page:page},callback_);
+    }
   }
   static header(token){
     let header = new Headers();

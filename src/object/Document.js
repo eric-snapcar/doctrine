@@ -6,7 +6,6 @@ export default class Document {
         this.author_name = data.author_name;
         this.key = data.key;
         this.cover_i = data.cover_i;
-        console.log(data);
       }
   }
   imageUrl(){
