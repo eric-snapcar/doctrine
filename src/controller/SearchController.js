@@ -16,6 +16,7 @@ export default class SearchController extends Component {
   onTapSearchButton(){
     let text = this.state.searchText;
     if(text != null && text.length > 2){
+      this.setState({page:1});
       this.search(text,1);
     }else {
       this.setState({showPopOver:true});
@@ -70,7 +71,7 @@ export default class SearchController extends Component {
             <div className="searchControllerResults">
                 <div className="searchHeader">{this.state.results.numFound} books found</div>
                 <SearchDocumentList documents={this.state.results.documents} />
-                <SearchPagination start={this.state.page} max={Math.floor(this.state.results.numFound/10)} active={1} onSelect={(page) => console.log(page)}/>
+                <SearchPagination start={Math.max(this.state.page - 5,1)} max={Math.floor(this.state.results.numFound/10)} active={this.state.page} onSelect={(page) => this.setState({page:page})}/>
             </div>
           }
           {this.state.loading && <div className="searchControllerLoadingWrapper" ><Spinner className="pt-small"/></div>}
