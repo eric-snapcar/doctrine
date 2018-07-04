@@ -8,7 +8,7 @@ import { Pagination } from 'react-bootstrap';
 export default class SearchController extends Component {
   constructor(props){
     super(props);
-    this.state = {results:null,searchText:null,error:null,loading:false,showPopOver:false};
+    this.state = {results:null,searchText:null,error:null,loading:false,showPopOver:false,page:1};
   }
   componentDidMount(){
     this.searchBar.focus();
@@ -16,21 +16,24 @@ export default class SearchController extends Component {
   onTapSearchButton(){
     let text = this.state.searchText;
     if(text != null && text.length > 2){
-      this.setState({loading:true});
-      SearchService.search(text,1,(searchResult,error)=>{
-        this.setState({loading:false});
-        if(error != null){
-          this.setState({error:error});
-        }else {
-          if(searchResult.searchText == this.state.searchText){
-            this.setState({results:searchResult});
-          }
-        }
-      });
+      this.search(text,1);
     }else {
       this.setState({showPopOver:true});
       this.searchBar.focus();
     }
+  }
+  search(text,page){
+    this.setState({loading:true});
+    SearchService.search(text,page,(searchResult,error)=>{
+      this.setState({loading:false});
+      if(error != null){
+        this.setState({error:error});
+      }else {
+        if(searchResult.searchText == this.state.searchText){
+          this.setState({results:searchResult});
+        }
+      }
+    });
   }
   render() {
     return (
@@ -41,6 +44,7 @@ export default class SearchController extends Component {
 
               <SearchPopOver isOpen={this.state.showPopOver} canOutsideClickClose={true} onClose={() => this.setState({showPopOver:false})}>
                   <input value={this.state.searchText}
+                  disabled ={this.state.loading}
                   onKeyPress={(event) => {
                       if(event.key == 'Enter'){
                         this.onTapSearchButton();
@@ -66,7 +70,7 @@ export default class SearchController extends Component {
             <div className="searchControllerResults">
                 <div className="searchHeader">{this.state.results.numFound} books found</div>
                 <SearchDocumentList documents={this.state.results.documents} />
-                <SearchPagination first={1} max={Math.floor(this.state.results.numFound/10)} active={1} onSelect={(page) => console.log(page)}/>
+                <SearchPagination start={this.state.page} max={Math.floor(this.state.results.numFound/10)} active={1} onSelect={(page) => console.log(page)}/>
             </div>
           }
           {this.state.loading && <div className="searchControllerLoadingWrapper" ><Spinner className="pt-small"/></div>}
@@ -119,8 +123,8 @@ class SearchPagination extends React.Component {
   render(){
     let active = this.props.active;
     let items = [];
-    let start = this.props.first;
-    let end = Math.min(this.props.first + 9, this.props.max);
+    let start = this.props.start;
+    let end = Math.min(this.props.start + 9, this.props.max);
     for (let page = start; page <= end; page++) {
         items.push(
             <Pagination.Item active={page === active} onClick={()=>this.props.onSelect(page)}>{page}</Pagination.Item>
