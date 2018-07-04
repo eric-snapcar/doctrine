@@ -2,7 +2,7 @@
 import SearchResult  from '../object/SearchResult';
 const baseUrl = "http://openlibrary.org/search.json";
 export default class SearchService {
-  static search(searchText,callback){
+  static search(searchText,page,callback){
     const callback_ = function(json,error){
       if(error != null){
           callback(null,error);
@@ -13,7 +13,7 @@ export default class SearchService {
           callback(searchResult,null);
       }
     }
-    this.get({q:searchText,page:800},callback_);
+    this.get({q:searchText,page:page},callback_);
   }
   static header(token){
     let header = new Headers();

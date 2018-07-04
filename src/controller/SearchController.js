@@ -17,7 +17,7 @@ export default class SearchController extends Component {
     let text = this.state.searchText;
     if(text != null && text.length > 2){
       this.setState({loading:true});
-      SearchService.search(text,(searchResult,error)=>{
+      SearchService.search(text,1,(searchResult,error)=>{
         this.setState({loading:false});
         if(error != null){
           this.setState({error:error});
@@ -73,7 +73,7 @@ export default class SearchController extends Component {
             </div>
           }
           {this.state.loading && <div className="searchControllerLoadingWrapper" ><Spinner className="pt-small"/></div>}
-          <SearchPagination/>
+          <SearchPagination first={1} max={5} active={1}/>
       </div>
     );
   }
@@ -107,9 +107,10 @@ class SearchPopOver extends React.Component {
 }
 class SearchPagination extends React.Component {
   render(){
-    let active = 7;
+    let active = this.props.active;
     let items = [];
-    for (let number = 1; number <= 10; number++) {
+    let limit = Math.min(this.props.first + 9, this.props.max);
+    for (let number = this.props.first; number <= limit; number++) {
         items.push(
             <Pagination.Item active={number === active}>{number}</Pagination.Item>
         );
