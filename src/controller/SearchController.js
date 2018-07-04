@@ -1,11 +1,12 @@
 
-import React, { Component } from 'react';
+import React from 'react';
 import '../style.css';
+import SearchCell from './SearchCell';
 import SearchService  from '../service/SearchService';
 import { Button, Intent, Spinner, Dialog, Popover, Position } from "@blueprintjs/core";
 import { Pagination } from 'react-bootstrap';
-
-export default class SearchController extends Component {
+import Img from 'react-image'
+export default class SearchController extends React.Component {
   constructor(props){
     super(props);
     this.state = {results:null,searchText:null,error:null,loading:false,showPopOver:false,page:1};
@@ -143,25 +144,6 @@ class SearchPagination extends React.Component {
     }
     return(
       <Pagination bsSize="small">{items}</Pagination>
-    );
-  }
-}
-class SearchCell extends React.Component {
-  openUrl(){
-    var win = window.open(this.props.document.targetUrl(), '_blank');
-    win.focus();
-  }
-  render(){
-    return(
-      <div className="searchCell">
-          {this.props.document.imageUrl()
-            && <div onClick={()=> this.openUrl()} className="searchCellImage"><img src={this.props.document.imageUrl()}/></div>
-          }
-          <div className="searchCellText">
-              <div onClick={()=> this.openUrl()} className="title">{this.props.document.title}</div>
-              {this.props.document.author_name && <div className="details">Author: {this.props.document.author_name}</div>}
-          </div>
-      </div>
     );
   }
 }

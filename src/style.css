@@ -3,6 +3,7 @@
 .pagination a {
   background-color: white !important;
 }
+
 .popOver {
   padding: 13px;
   padding-top: 9px;
@@ -56,6 +57,7 @@ padding-left: 150px;
 }
 .searchControllerResults{
   margin-left: 150px;
+  margin-right: 75px;
 }
 .searchHeader{
   color: rgb(128, 128, 128);
@@ -89,12 +91,24 @@ padding-left: 150px;
 .searchCellText{
 }
 .searchCellImage {
+  flex-shrink: 0;
   cursor: pointer;
   margin-right: 8px;
   height: 100px;
   width: 100px;
   overflow: hidden;
-      border: 1px solid #ebebeb;
+  border: 1px solid #ebebeb;
+  position: relative;
+}
+.searchCellImagePlaceHolder {
+  background-color: #F9F9F9;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  color: rgba(128, 128, 128,0.7);
+  font-size: 10.5px;
 }
 .searchCellImage img{
   width: 100px;
