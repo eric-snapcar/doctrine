@@ -66,10 +66,11 @@ export default class SearchController extends Component {
             <div className="searchControllerResults">
                 <div className="searchHeader">{this.state.results.numFound} books found</div>
                 <SearchDocumentList documents={this.state.results.documents} />
+                <SearchPagination first={1} max={5} active={1}/>
             </div>
           }
           {this.state.loading && <div className="searchControllerLoadingWrapper" ><Spinner className="pt-small"/></div>}
-          <SearchPagination first={1} max={5} active={1}/>
+
       </div>
     );
   }
