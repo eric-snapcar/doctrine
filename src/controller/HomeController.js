@@ -13,7 +13,17 @@ export default class HomeController extends Component {
     return (
       <div className="homeController">
           <img className="searchLogo"  src="logo.svg"   onClick={this.props.logOut}  alt="" />
-          <input onChange={(event) => this.onSearch(event.target.value)} ref = { element => this.searchBar = element} type="text" className="searchBar" placeholder={this.props.placeholder ? this.props.placeholder : "Search"} autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+          <input
+          value={this.props.searchText}
+          onChange={(event) =>
+            {
+                let searchText = event.target.value;
+                this.props.onChange(searchText);
+            }
+          }
+          ref = { element => this.searchBar = element}
+          placeholder={this.props.placeholder ? this.props.placeholder : "Search"}
+          type="text" className="searchBar" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
       </div>
     );
   }

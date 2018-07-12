@@ -6,7 +6,7 @@ export default class RootController extends Component {
   render() {
     return (
       <div className="rootController">
-          <SearchController />
+          <HomeController />
       </div>
     );
   }
