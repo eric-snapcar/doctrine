@@ -24,8 +24,9 @@ export default class SearchCell extends React.Component {
             </div>
 
           <div className="searchCellText">
-              <div onClick={()=> this.openUrl()} className="title">{this.props.document.title}</div>
-              {this.props.document.author_name && <div className="details">Author: {this.props.document.author_name}</div>}
+              <div onClick={()=> this.openUrl()} className="title">{this.props.document.title()}</div>
+              <div className="details"> {this.props.document.details()}</div>
+              <div className="description"> {this.props.document.description()}</div>
           </div>
       </div>
     );

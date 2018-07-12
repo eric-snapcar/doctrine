@@ -4,17 +4,21 @@ export default class Document {
       if ( data ) {
         console.log("Document");
         console.log(data);
-        this.title = data.title;
+        this.title_ = data.title;
         this.author_name = data.author_name;
         this.key = data.key;
         this.cover_i = data.cover_i;
+        this.first_publish_year = data.first_publish_year;
       }
   }
   title(){
-    return this.title;
+    return this.title_;
   }
   details(){
-    return "By " + this.author_name;
+    if(this.author_name){
+      return "Author: " + this.author_name;
+    }
+    return "Author: Unknown";
   }
   description(){
     return "Description";

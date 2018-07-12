@@ -80,6 +80,12 @@ padding-left: 150px;
   font-size:18px;
   font-weight:400;
 }
+.searchCell .description{
+  color: rgba(84,84,84,0.99);
+  font-size: 13px;
+  margin-top: 1.5px;
+  font-weight: 400;
+}
 .searchCell .title:hover {
     text-decoration: underline;
 }
