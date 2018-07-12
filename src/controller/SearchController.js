@@ -20,8 +20,8 @@ export default class SearchController extends React.Component {
     if(page*10 > this.state.results.start + 100){
       this.search(this.state.searchText,Math.ceil(page/10),false);
     }
-    else if(page*10 >= this.state.results.start + 60){
-      this.presearch(this.state.searchText,Math.ceil(page/10)+1);
+    else if(page*10 >= this.state.results.start + 40){
+      this.preSearch(this.state.searchText,Math.ceil(page/10)+1);
     }
     else if(page*10 <= this.state.results.start ){
       this.search(this.state.searchText,Math.ceil(page/10),false);
@@ -38,9 +38,11 @@ export default class SearchController extends React.Component {
     }
   }
   preSearch(text,page){
-    console.log("presearch");
-    console.log(text);
-    console.log(page);
+    SearchService.presearch(text,page,(error)=>{
+      if(error != null){
+        console.log(error);
+      }
+    });
   }
   search(text,page,timeout){
     this.setState({loading:true});

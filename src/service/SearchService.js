@@ -3,6 +3,24 @@ import SearchResult  from '../object/SearchResult';
 const baseUrl = "http://openlibrary.org/search.json";
 let cache ={};
 export default class SearchService {
+  static presearch(searchText,page,callback){
+    if(cache[searchText] == null || cache[searchText][page] == null){
+      const callback_ = function(json,error){
+        if(error != null){
+            callback(error);
+        }
+        else{
+            let searchResult = new SearchResult(json,searchText);
+            if(cache[searchText] == null){
+              cache[searchText] = {};
+            }
+            cache[searchText][page] = searchResult;
+            callback(null);
+        }
+      }
+      this.get({q:searchText,page:page},callback_);
+    }
+  }
   static search(searchText,page,timeout,callback){
     if(cache[searchText] != null && cache[searchText][page] != null){
       if(timeout){

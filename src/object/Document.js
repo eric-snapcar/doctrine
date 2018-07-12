@@ -2,8 +2,6 @@
 export default class Document {
   constructor(data,searchText){
       if ( data ) {
-        console.log("Document");
-        console.log(data);
         this.title_ = data.title;
         this.author_name = data.author_name;
         this.key = data.key;
