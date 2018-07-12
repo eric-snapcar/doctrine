@@ -9,7 +9,7 @@ import Img from 'react-image'
 export default class SearchController extends React.Component {
   constructor(props){
     super(props);
-    this.state = {results:null,searchText:null,error:null,loading:false,showPopOver:false,page:1};
+    this.state = {results:null,searchText:this.props.initialSearchText,error:null,loading:false,showPopOver:false,page:1};
   }
   componentDidMount(){
     this.searchBar.focus();

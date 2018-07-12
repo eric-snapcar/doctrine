@@ -11,7 +11,7 @@ export default class RootController extends Component {
     return (
       <div className="rootController">
       { this.state.searchText != null && this.state.searchText.length > 0 ?
-        <SearchController onType={(searchText)=> this.setState({searchText:searchText})} searchText={this.state.searchText}/>
+        <SearchController initialSearchText={this.state.searchText}/>
         :   <HomeController onType={(searchText)=> this.setState({searchText:searchText})} searchText={this.state.searchText} />
       }
       </div>
