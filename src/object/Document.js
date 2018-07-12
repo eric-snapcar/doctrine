@@ -21,7 +21,16 @@ export default class Document {
     return "Author: Unknown";
   }
   description(){
-    return "Description";
+    if(this.descriptionPuslihedYear() ){
+      return this.descriptionPuslihedYear();
+    }
+    return "";
+  }
+  descriptionPuslihedYear(){
+    if(this.first_publish_year){
+      return "First published in " + this.first_publish_year;
+    }
+    return "First published year unknown";;
   }
   imageUrl(){
     if(this.cover_i != null){

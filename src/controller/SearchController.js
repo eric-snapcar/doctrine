@@ -9,7 +9,8 @@ import Img from 'react-image'
 export default class SearchController extends React.Component {
   constructor(props){
     super(props);
-    this.state = {results:null,searchText:this.props.initialSearchText,error:null,loading:false,showPopOver:false,page:1};
+    this.state = {results:null,searchText:this.props.initialSearchText
+      ,error:null,loading:false,showPopOver:false,page:1};
   }
   componentDidMount(){
     this.searchBar.focus();
@@ -18,6 +19,9 @@ export default class SearchController extends React.Component {
     this.setState({page:page});
     if(page*10 > this.state.results.start + 100){
       this.search(this.state.searchText,Math.ceil(page/10),false);
+    }
+    else if(page*10 >= this.state.results.start + 60){
+      this.presearch(this.state.searchText,Math.ceil(page/10)+1);
     }
     else if(page*10 <= this.state.results.start ){
       this.search(this.state.searchText,Math.ceil(page/10),false);
@@ -32,6 +36,11 @@ export default class SearchController extends React.Component {
       this.setState({showPopOver:true});
       this.searchBar.focus();
     }
+  }
+  preSearch(text,page){
+    console.log("presearch");
+    console.log(text);
+    console.log(page);
   }
   search(text,page,timeout){
     this.setState({loading:true});

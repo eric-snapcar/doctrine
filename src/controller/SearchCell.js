@@ -9,8 +9,6 @@ export default class SearchCell extends React.Component {
   render(){
     return(
       <div className="searchCell">
-
-
             <div onClick={()=> this.openUrl()} className="searchCellImage">
                {this.props.document.imageUrl()
                 ?
@@ -22,7 +20,6 @@ export default class SearchCell extends React.Component {
                     <div className="searchCellImagePlaceHolder">No Cover</div>
                 }
             </div>
-
           <div className="searchCellText">
               <div onClick={()=> this.openUrl()} className="title">{this.props.document.title()}</div>
               <div className="details"> {this.props.document.details()}</div>
