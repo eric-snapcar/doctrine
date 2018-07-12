@@ -18,7 +18,7 @@ export default class HomeController extends Component {
           onChange={(event) =>
             {
                 let searchText = event.target.value;
-                this.props.onChange(searchText);
+                this.props.onType(searchText);
             }
           }
           ref = { element => this.searchBar = element}
