@@ -15,6 +15,9 @@ export default class SearchController extends React.Component {
   componentDidMount(){
     this.searchBar.focus();
   }
+  capitalizeFirstLetter(string) {
+      return string.charAt(0).toUpperCase() + string.slice(1);
+  }
   onSelectPage(page){
     this.setState({page:page});
     if(page*10 > this.state.results.start + 100){
@@ -75,7 +78,7 @@ export default class SearchController extends React.Component {
                   }
                   onChange={(event) => {
                       let searchText = event.target.value;
-                      this.setState({searchText:searchText })
+                      this.setState({searchText:this.capitalizeFirstLetter(searchText) })
                       if(searchText.length > 2){
                         this.setState({ showPopOver:false})
                       }

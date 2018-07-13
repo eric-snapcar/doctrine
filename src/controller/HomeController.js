@@ -5,9 +5,8 @@ export default class HomeController extends Component {
   componentDidMount(){
     this.searchBar.focus();
   }
-  onSearch(text){
-    console.log("onSearch");
-    console.log(text);
+  capitalizeFirstLetter(string) {
+      return string.charAt(0).toUpperCase() + string.slice(1);
   }
   render() {
     return (
@@ -18,7 +17,7 @@ export default class HomeController extends Component {
           onChange={(event) =>
             {
                 let searchText = event.target.value;
-                this.props.onType(searchText);
+                this.props.onType(this.capitalizeFirstLetter(searchText));
             }
           }
           ref = { element => this.searchBar = element}
